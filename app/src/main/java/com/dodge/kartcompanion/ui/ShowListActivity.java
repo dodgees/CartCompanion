@@ -2,6 +2,7 @@ package com.dodge.kartcompanion.ui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +27,7 @@ public class ShowListActivity extends ListActivity {
     private ShoppingList mShoppingList;
     private TextView titleText, budgetText, costTotalText;
     private Button mAddItemButton;
+    private String mBudget;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +36,12 @@ public class ShowListActivity extends ListActivity {
 
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
-        String budget = intent.getStringExtra("budget");
+        mBudget = intent.getStringExtra("budget");
         //double budget = Double.valueOf(b).doubleValue();
 
 
 
-        mShoppingList = new ShoppingList(name, budget);
+        mShoppingList = new ShoppingList(name, mBudget);
 
 
 
@@ -47,7 +49,7 @@ public class ShowListActivity extends ListActivity {
         titleText = (TextView) findViewById(R.id.listNameTextView);
         titleText.setText(name);
         budgetText = (TextView) findViewById(R.id.budgetTotalTextView);
-        budgetText.setText("$ " + budget);
+        budgetText.setText("$ " + mBudget);
         costTotalText = (TextView) findViewById(R.id.costTotalTextView);
         costTotalText.setText("$ 0.00");
 
@@ -116,6 +118,13 @@ public class ShowListActivity extends ListActivity {
         }
 
         costTotalText.setText(String.format("$ %.2f", total));
+
+        if(total > Double.valueOf(mBudget)){
+            costTotalText.setTextColor(Color.RED);
+        }
+        else{
+            costTotalText.setTextColor(Color.BLACK);
+        }
 
         // itemNames[0] = "Hello"; This didn't solve the NullPointerException
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, itemNames);
