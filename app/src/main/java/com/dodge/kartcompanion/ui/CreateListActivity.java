@@ -14,7 +14,6 @@ public class CreateListActivity extends Activity {
 
     private Button mCreateListButton;
     private EditText mNameField, mBudgetField;
-    private ShoppingList mShoppingList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

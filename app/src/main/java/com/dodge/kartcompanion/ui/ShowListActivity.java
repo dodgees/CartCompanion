@@ -20,13 +20,12 @@ public class ShowListActivity extends Activity {
 
     private ShoppingList mShoppingList;
     private TextView titleText, budgetText;
-    private TextView mTotalAndBudget;
     private Button mAddItemButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_show_list);
+        setContentView(R.layout.activity_show_list);
 
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
