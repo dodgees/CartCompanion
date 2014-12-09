@@ -37,7 +37,7 @@ public class AddItemActivity extends Activity {
                 data.putExtra("itemName", itemName);
                 data.putExtra("itemPrice", itemPrice);
 
-                setResult(RESULT_OK, data);
+                setResult(1, data);
                 finish();
             }
         });

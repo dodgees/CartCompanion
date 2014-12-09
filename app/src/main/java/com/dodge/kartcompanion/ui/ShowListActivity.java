@@ -42,7 +42,7 @@ public class ShowListActivity extends Activity {
         titleText = (TextView) findViewById(R.id.listNameTextView);
         titleText.setText(name);
         budgetText = (TextView) findViewById(R.id.budgetTotalTextView);
-        budgetText.setText(budget);
+        budgetText.setText("$ " + budget);
 
         mAddItemButton = (Button) findViewById(R.id.addItemButton);
 
@@ -50,7 +50,7 @@ public class ShowListActivity extends Activity {
             @Override
             public void onClick(View view) {
                 //Create new item, maybe recall on create?
-            //    addItem();
+                addItem();
 
             }
         });
@@ -70,14 +70,15 @@ public class ShowListActivity extends Activity {
         ShoppingItem item = new ShoppingItem(itemName, itemPrice);
         mShoppingList.addItem(item);
 
-        String [] itemNames = new String[mShoppingList.getItemCount()];
+        String [] itemNames = new String[200];
         ShoppingItem [] currentItems = mShoppingList.getShoppingList();
 
+
         for (int i = 0; i <= mShoppingList.getItemCount(); i++){
-            itemNames[i] = currentItems[i].getItemName();
+            itemNames[0] = currentItems[0].getItemName();
         }
 
-//        setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, itemNames));
+       // setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, itemNames));
     }
 
 }
