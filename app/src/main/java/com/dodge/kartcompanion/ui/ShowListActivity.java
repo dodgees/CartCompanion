@@ -8,6 +8,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
+import android.widget.SimpleAdapter;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.ListView;
 import android.app.ListActivity;
@@ -16,7 +19,9 @@ import com.dodge.kartcompanion.R;
 import com.dodge.kartcompanion.model.ShoppingItem;
 import com.dodge.kartcompanion.model.ShoppingList;
 
-public class ShowListActivity extends Activity {
+import java.util.ArrayList;
+
+public class ShowListActivity extends ListActivity {
 
     private ShoppingList mShoppingList;
     private TextView titleText, budgetText;
@@ -46,11 +51,33 @@ public class ShowListActivity extends Activity {
 
         mAddItemButton = (Button) findViewById(R.id.addItemButton);
 
+
+        ArrayList<String> itemNames = new ArrayList<String>();
+        ShoppingItem [] currentItems = mShoppingList.getShoppingList();
+
+
+       // itemNames[0] = "Hello"; This didn't solve the NullPointerException
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, itemNames);
+
+        //ListView listView = (ListView) findViewById(android.);
+        //listView.
+        setListAdapter(adapter);
+
+
+
         mAddItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Create new item, maybe recall on create?
                 addItem();
+
+
+
+              //  for (int i = 0; i <= mShoppingList.getItemCount(); i++){
+              //      itemNames[0] = currentItems[0].getItemName();
+              //  }
+
+
 
             }
         });
@@ -70,15 +97,24 @@ public class ShowListActivity extends Activity {
         ShoppingItem item = new ShoppingItem(itemName, itemPrice);
         mShoppingList.addItem(item);
 
-        String [] itemNames = new String[200];
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        ArrayList<String> itemNames = new ArrayList<String>();
         ShoppingItem [] currentItems = mShoppingList.getShoppingList();
 
 
-        for (int i = 0; i <= mShoppingList.getItemCount(); i++){
-            itemNames[0] = currentItems[0].getItemName();
+        for (int i = 0; i < mShoppingList.getItemCount(); i++){
+            itemNames.add(currentItems[i].getItemName());
         }
+        // itemNames[0] = "Hello"; This didn't solve the NullPointerException
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, itemNames);
 
-       // setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, itemNames));
+        //ListView listView = (ListView) findViewById(android.);
+        //listView.
+        setListAdapter(adapter);
     }
-
 }
