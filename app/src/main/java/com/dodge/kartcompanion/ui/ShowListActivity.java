@@ -24,7 +24,7 @@ import java.util.ArrayList;
 public class ShowListActivity extends ListActivity {
 
     private ShoppingList mShoppingList;
-    private TextView titleText, budgetText;
+    private TextView titleText, budgetText, costTotalText;
     private Button mAddItemButton;
 
     @Override
@@ -48,6 +48,8 @@ public class ShowListActivity extends ListActivity {
         titleText.setText(name);
         budgetText = (TextView) findViewById(R.id.budgetTotalTextView);
         budgetText.setText("$ " + budget);
+        costTotalText = (TextView) findViewById(R.id.costTotalTextView);
+        costTotalText.setText("$ 0.00");
 
         mAddItemButton = (Button) findViewById(R.id.addItemButton);
 
@@ -106,10 +108,15 @@ public class ShowListActivity extends ListActivity {
         ArrayList<String> itemNames = new ArrayList<String>();
         ShoppingItem [] currentItems = mShoppingList.getShoppingList();
 
+        double total = 0.00;
 
         for (int i = 0; i < mShoppingList.getItemCount(); i++){
             itemNames.add(currentItems[i].getItemName());
+            total += currentItems[i].getPrice();
         }
+
+        costTotalText.setText(String.format("$ %.2f", total));
+
         // itemNames[0] = "Hello"; This didn't solve the NullPointerException
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, itemNames);
 
