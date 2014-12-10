@@ -108,12 +108,14 @@ public class ShowListActivity extends ListActivity {
         super.onResume();
 
         ArrayList<String> itemNames = new ArrayList<String>();
+        ArrayList<Double> itemPrices = new ArrayList<Double>();
         ShoppingItem [] currentItems = mShoppingList.getShoppingList();
 
         double total = 0.00;
 
         for (int i = 0; i < mShoppingList.getItemCount(); i++){
             itemNames.add(currentItems[i].getItemName());
+            itemPrices.add(currentItems[i].getPrice());
             total += currentItems[i].getPrice();
         }
 
