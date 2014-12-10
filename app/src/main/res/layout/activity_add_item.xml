@@ -33,9 +33,9 @@
         android:text="Add Item"
         android:id="@+id/addItemButton"
         android:background="@android:color/white"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
 
     <EditText
         android:layout_width="match_parent"
