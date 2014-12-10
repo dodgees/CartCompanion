@@ -117,7 +117,7 @@ public class ShowListActivity extends ListActivity {
             total += currentItems[i].getPrice();
         }
 
-        costTotalText.setText(String.format("$ %.2f", total));
+        costTotalText.setText(String.format("$ %.2f (%.2f)", total, Double.valueOf(mBudget) - total));
 
         if(total > Double.valueOf(mBudget)){
             costTotalText.setTextColor(Color.RED);
