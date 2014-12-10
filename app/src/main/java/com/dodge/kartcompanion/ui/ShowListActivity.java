@@ -21,6 +21,9 @@ import com.dodge.kartcompanion.model.ShoppingItem;
 import com.dodge.kartcompanion.model.ShoppingList;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ShowListActivity extends ListActivity {
 
@@ -111,11 +114,27 @@ public class ShowListActivity extends ListActivity {
         ArrayList<Double> itemPrices = new ArrayList<Double>();
         ShoppingItem [] currentItems = mShoppingList.getShoppingList();
 
+        String text1 = "text1";
+        String text2 = "text2";
+
+        List<Map<String, String>> listItem = new ArrayList<Map<String, String>>();
+        Map<String, String> listItemMap = new HashMap<String, String>();
+
         double total = 0.00;
 
+        // Put names and prices in separate arrayLists. Calculate total price.
         for (int i = 0; i < mShoppingList.getItemCount(); i++){
+
+
             itemNames.add(currentItems[i].getItemName());
             itemPrices.add(currentItems[i].getPrice());
+
+            //put items and prices into a hashMap
+            listItemMap.put(text1, currentItems[i].getItemName());
+            listItemMap.put(text2, Double.valueOf(currentItems[i].getPrice()).toString());
+            listItem.add(listItemMap);
+
+            //Calculates total cost of items in list.
             total += currentItems[i].getPrice();
         }
 
@@ -128,11 +147,17 @@ public class ShowListActivity extends ListActivity {
             costTotalText.setTextColor(Color.BLACK);
         }
 
-        // itemNames[0] = "Hello"; This didn't solve the NullPointerException
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, itemNames);
+        //Used for only name implementation
+       // ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, itemNames);
 
-        //ListView listView = (ListView) findViewById(android.);
-        //listView.
+        //Used for Only name implementation
+        //setListAdapter(adapter);
+
+        String [] fromMapKey = new String[]{text1, text2};
+        int[] toLayoutId = new int[]{android.R.id.text1, android.R.id.text2};
+
+        SimpleAdapter adapter = new SimpleAdapter(this, listItem, android.R.layout.simple_list_item_2, fromMapKey, toLayoutId);
         setListAdapter(adapter);
+
     }
 }
